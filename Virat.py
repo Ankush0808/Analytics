@@ -129,13 +129,15 @@ chase_filter_test=df_test[df_test['Innings']==4]
 
 ##################################################
 
+##########################################################
 year=st.sidebar.slider("Select the year",min_value=2008,max_value=2023)
 filtered_df=df_odi[df_odi['Year']==year]
 filtered_df_test=df_test[df_test['Year']==year]
 filtered_df_t20=df_t20[df_t20['Year']==year]
-video_url = "https://www.youtube.com/watch?v=OMBEtL6-mnU"
 
 #################################################################
+
+
 rbtn=st.sidebar.radio("Select the format",options=['Test','Odi','T20I'])
 a=st.sidebar.selectbox("Want to know more about Virat?",
 ['None','Why the run machine?','How Virat gets dismissed?','Stats','Graphical representation of stats','Why Chase Master?','Lean Patch'],index=0)
@@ -180,5 +182,6 @@ elif(a=='Lean Patch'):
     df_odi[df_odi['Year'].isin([2020,2021,2022])]
 else:
     st.image('Virat_FC.jpg')
+
 
 
