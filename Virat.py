@@ -130,7 +130,7 @@ chase_filter_test=df_test[df_test['Innings']==4]
 ##################################################
 
 ##########################################################
-year=st.sidebar.slider("Select the year",min_value=2008,max_value=2023)
+year=st.sidebar.slider("Select the year",min_value=2008,max_value=2024)
 filtered_df=df_odi[df_odi['Year']==year]
 filtered_df_test=df_test[df_test['Year']==year]
 filtered_df_t20=df_t20[df_t20['Year']==year]
