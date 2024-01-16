@@ -72,7 +72,7 @@ def distibution(filtered_df):
     st.sidebar.image('Virat_RM.jpg')
     #st.sidebar.markdown('In the History of Cricket, there are many who bat, then there are people with extraordinary talent and then there is Virat Kohli')
     values2=filtered_df['Runs_scored']
-    fig1=px.histogram(filtered_df['Runs_scored'],nbins=10,title='Distribution Plot',labels={'x':'values2','y':'Frequency'})
+    fig1=px.histogram(filtered_df['Runs_scored'],title='Distribution Plot',labels={'x':'values2','y':'Frequency'})
     fig1.update_layout(
         title_font_size=42,
         width=500,
