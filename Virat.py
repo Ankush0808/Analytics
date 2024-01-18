@@ -93,22 +93,29 @@ def chasy(df_odi):
     fig3=px.scatter(df_odi,x='Runs_scored',y='Balls_Faced', color='Innings', color_discrete_sequence=px.colors.qualitative.Set1)
     st.plotly_chart(fig3)
     st.header("Average runs Scored every year while chasing")
-    fig4=px.bar(df_odi.groupby(['Year','Innings'])['Runs_scored'].mean().reset_index(),x='Year',y='Runs_scored',color='Innings',
+    df_odi_Mean=df_odi.groupby(['Year','Innings'])['Runs_scored'].mean().reset_index()
+    df_odi_Mean['runs_rounded']=df_odi_Mean['Runs_scored'].round().astype(int)
+    fig4=px.bar(df_odi_Mean,x='Year',y='Runs_scored',text='runs_rounded',color='Innings',
     color_discrete_sequence=px.colors.qualitative.Set1)
+    fig4.update_traces(texttemplate='%{text}', textposition='inside')
     st.plotly_chart(fig4)
-    fig5=px.bar(df_odi.groupby(['Year','Innings'])['Number_of_100s'].sum().reset_index(),x='Year',y='Number_of_100s',color='Innings',
+    fig5=px.bar(df_odi.groupby(['Year','Innings'])['Number_of_100s'].sum().reset_index(),x='Year',y='Number_of_100s',text='Number_of_100s',color='Innings',
     color_discrete_sequence=px.colors.qualitative.Set1)
+    fig5.update_traces(texttemplate='%{text}', textposition='inside')
     st.plotly_chart(fig5)
 
 def chasy1(df_t20):
     st.sidebar.image('Virat_4.jpg')
     st.sidebar.markdown("Although Virat is said to be have a good average at run chases it appears that he's been equally good at the 1st innings as well")
-    fig6=px.scatter(df_t20,x='Runs_scored',y='Balls_Faced', color='Innings', color_discrete_sequence=px.colors.qualitative.Set1)
+    fig6=px.scatter(df_t20,x='Runs_scored',y='Balls_Faced',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
     st.plotly_chart(fig6)
     st.header("Average runs Scored every year while chasing")
-    fig7=px.bar(df_t20.groupby(['Year','Innings'])['Runs_scored'].mean().reset_index(),x='Year',y='Runs_scored',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
+    df_t20_mean=df_t20.groupby(['Year','Innings'])['Runs_scored'].mean().reset_index()
+    df_t20_mean['runs_rounded'] = df_t20_mean['Runs_scored'].round().astype(int)
+    fig7=px.bar(df_t20_mean,x='Year',y='Runs_scored',text='runs_rounded',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
+    fig7.update_traces(texttemplate='%{text}', textposition='inside')
     st.plotly_chart(fig7)
-    fig8=px.bar(df_t20.groupby(['Year','Innings'])['Number_of_50s'].sum().reset_index(),x='Year',y='Number_of_50s',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
+    fig8=px.bar(df_t20.groupby(['Year','Innings'])['Number_of_50s'].sum().reset_index(),x='Year',y='Number_of_50s',text='Number_of_50s',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
     st.plotly_chart(fig8)
 ###################################################################################################
     
