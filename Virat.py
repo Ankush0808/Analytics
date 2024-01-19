@@ -4,6 +4,7 @@ import seaborn as sns
 import streamlit as st
 import plotly.express as px
 import numpy as np
+import plotly.graph_objects as go
 ################################################################################################
 # All the functions
 st.set_page_config(layout='wide')
@@ -70,7 +71,6 @@ def graphy20(df_test):
 
 def distibution(filtered_df):
     st.sidebar.image('Virat_RM.jpg')
-    #st.sidebar.markdown('In the History of Cricket, there are many who bat, then there are people with extraordinary talent and then there is Virat Kohli')
     values2=filtered_df['Runs_scored']
     fig1=px.histogram(filtered_df['Runs_scored'],title='Distribution Plot',labels={'x':'values2','y':'Frequency'})
     fig1.update_layout(
@@ -81,11 +81,20 @@ def distibution(filtered_df):
     st.plotly_chart(fig1)
 def dismisal(filtered_df):
     st.sidebar.image('Virat_dis.jpeg')
-    values=filtered_df['Dismissal'].value_counts()
+    years=['2008','2009',2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024]
+    cross_tab = pd.crosstab(filtered_df['Year'], filtered_df['Dismissal'], margins=True, margins_name='Total')
+    values = cross_tab.values[:-1, :-1]
     names=filtered_df['Dismissal'].unique()
-    figy=px.pie(values=values,names=names,title='Pie chart')
-    st.plotly_chart(figy)
-    figy.update_layout(title_font_size=70)
+    heatmap=go.Heatmap(x=names,y=years,z=values)    
+    layout = go.Layout(
+    title='Frequency of dismissal over the years',
+    xaxis=dict(title='Years'),
+    yaxis=dict(title='Type of dismisal')
+    )
+    print(cross_tab)
+    fig_hmp = go.Figure(data=[heatmap], layout=layout)
+    fig_hmp.update_layout(height=650, width=800)
+    st.plotly_chart(fig_hmp)
 
 def chasy(df_odi):
     st.sidebar.image('Virat_4.jpg')
@@ -157,11 +166,11 @@ if(a=='Why the run machine?'):
         distibution(filtered_df_test)
 elif(a=='How Virat gets dismissed?'):
     if(rbtn=='Odi'):
-        dismisal(filtered_df)
+        dismisal(df_odi)
     elif(rbtn=='T20I'):
-        dismisal(filtered_df_t20)
+        dismisal(df_t20)
     else:
-        dismisal(filtered_df_test)
+        dismisal(df_test)
 
 elif(a=='Stats'):
     if(rbtn=='Odi'):
