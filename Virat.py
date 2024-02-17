@@ -105,7 +105,7 @@ def chasy(df_odi):
     df_odi_Mean=df_odi.groupby(['Year','Innings'])['Runs_scored'].mean().reset_index()
     df_odi_Mean['runs_rounded']=df_odi_Mean['Runs_scored'].round().astype(int)
     fig4=px.bar(df_odi_Mean,x='Year',y='Runs_scored',text='runs_rounded',color='Innings',
-    color_discrete_sequence=px.colors.qualitative.Set1)
+    color_discrete_sequence=px.colors.qualitative.Set1,barmode='group')
     fig4.update_traces(texttemplate='%{text}', textposition='inside')
     st.plotly_chart(fig4)
     fig5=px.bar(df_odi.groupby(['Year','Innings'])['Number_of_100s'].sum().reset_index(),x='Year',y='Number_of_100s',text='Number_of_100s',color='Innings',
