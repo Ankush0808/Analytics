@@ -129,9 +129,9 @@ def chasy1(df_t20):
 ###################################################################################################
     
 
-df_odi=pd.read_csv("C:/Users/ankus/Virat_odi.csv")
-df_test=pd.read_csv("C:/Users/ankus/Virat_tests.csv")
-df_t20=pd.read_csv('C:/Users/ankus/Virat_T20.csv')
+df_odi=pd.read_csv("Virat_odi.csv")
+df_test=pd.read_csv("Virat_tests.csv")
+df_t20=pd.read_csv('Virat_T20.csv')
 st.markdown("<h1 style='color:Black ; font-family:Arial,Impact;'> Virat Kohli 👑🏏</h1>", unsafe_allow_html=True)
 df_odi['Strike_rate']=pd.to_numeric(df_odi['Strike_rate'],errors='coerce')
 df_odi['Number_of_4s']=pd.to_numeric(df_odi['Number_of_4s'],errors='coerce')
