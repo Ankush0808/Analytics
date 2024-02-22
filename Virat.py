@@ -5,6 +5,7 @@ import streamlit as st
 import plotly.express as px
 import numpy as np
 import plotly.graph_objects as go
+import pymongo
 ################################################################################################
 # All the functions
 st.set_page_config(layout='wide')
@@ -128,10 +129,32 @@ def chasy1(df_t20):
     st.plotly_chart(fig8)
 ###################################################################################################
     
+client = pymongo.MongoClient('mongodb://localhost:27017/')
 
-df_odi=pd.read_csv("Virat_odi.csv")
-df_test=pd.read_csv("Virat_tests.csv")
-df_t20=pd.read_csv('Virat_T20.csv')
+# Select database and collection
+db = client['Myfirstdb']
+collection_T20 = db['T20']
+collection_odi = db['Odi']
+collection_test = db['Test']
+
+
+# Query data from MongoDB collection
+cursor_T20 = collection_T20.find()
+cursor_test = collection_test.find()
+cursor_odi = collection_odi.find()
+
+
+# Convert cursor to list of dictionaries
+data_list_T20 = list(cursor_T20)
+data_list_test = list(cursor_test)
+data_list_odi= list(cursor_odi)
+
+# Convert list of dictionaries to DataFrame
+df_t20 = pd.DataFrame(data_list_T20)
+df_test = pd.DataFrame(data_list_test)
+df_odi = pd.DataFrame(data_list_odi)
+
+##################################################################################################
 st.markdown("<h1 style='color:Black ; font-family:Arial,Impact;'> Virat Kohli 👑🏏</h1>", unsafe_allow_html=True)
 df_odi['Strike_rate']=pd.to_numeric(df_odi['Strike_rate'],errors='coerce')
 df_odi['Number_of_4s']=pd.to_numeric(df_odi['Number_of_4s'],errors='coerce')
