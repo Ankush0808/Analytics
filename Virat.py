@@ -128,31 +128,10 @@ def chasy1(df_t20):
     fig8=px.bar(df_t20.groupby(['Year','Innings'])['Number_of_50s'].sum().reset_index(),x='Year',y='Number_of_50s',text='Number_of_50s',color='Innings',color_discrete_sequence=px.colors.qualitative.Set1)
     st.plotly_chart(fig8)
 ###################################################################################################
-    
-client = pymongo.MongoClient('mongodb://localhost:27017/')
 
-# Select database and collection
-db = client['Myfirstdb']
-collection_T20 = db['T20']
-collection_odi = db['Odi']
-collection_test = db['Test']
-
-
-# Query data from MongoDB collection
-cursor_T20 = collection_T20.find()
-cursor_test = collection_test.find()
-cursor_odi = collection_odi.find()
-
-
-# Convert cursor to list of dictionaries
-data_list_T20 = list(cursor_T20)
-data_list_test = list(cursor_test)
-data_list_odi= list(cursor_odi)
-
-# Convert list of dictionaries to DataFrame
-df_t20 = pd.DataFrame(data_list_T20)
-df_test = pd.DataFrame(data_list_test)
-df_odi = pd.DataFrame(data_list_odi)
+df_odi=pd.read_csv("Virat_odi.csv")
+df_test=pd.read_csv("Virat_tests.csv")
+df_t20=pd.read_csv('Virat_T20.csv')
 
 ##################################################################################################
 st.markdown("<h1 style='color:Black ; font-family:Arial,Impact;'> Virat Kohli 👑🏏</h1>", unsafe_allow_html=True)
